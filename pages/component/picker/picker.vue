@@ -44,6 +44,9 @@
 				</view>
 			</view>
 		</view>
+		<view class="uni-picker-tips">
+			注：选择 09:01 ~ 21:01 之间的时间, 不在区间内不能选中
+		</view>
 
 		<view class="uni-title uni-common-pl">日期选择器</view>
 		<view class="uni-list">
@@ -58,25 +61,28 @@
 				</view>
 			</view>
 		</view>
+		<view class="uni-picker-tips">
+			注：选择当前时间 ±10 年之间的时间, 不在区间内不能选中
+		</view>
 	</view>
 </template>
 <script>
-	
+
 	function getDate(type) {
 		const date = new Date();
-	
+
 		let year = date.getFullYear();
 		let month = date.getMonth() + 1;
 		let day = date.getDate();
-	
+
 		if (type === 'start') {
-			year = year - 60;
+			year = year - 10;
 		} else if (type === 'end') {
-			year = year + 2;
+			year = year + 10;
 		}
 		month = month > 9 ? month : '0' + month;;
 		day = day > 9 ? day : '0' + day;
-	
+
 		return `${year}-${month}-${day}`;
 	}
 	export default {
@@ -101,8 +107,8 @@
 		},
 		methods: {
 			bindPickerChange: function(e) {
-				console.log('picker发送选择改变，携带值为：' + e.target.value)
-				this.index = e.target.value
+				console.log('picker发送选择改变，携带值为：' + e.detail.value)
+				this.index = e.detail.value
 			},
 			bindMultiPickerColumnChange: function(e) {
 				console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value)
@@ -151,16 +157,22 @@
 				this.$forceUpdate()
 			},
 			bindDateChange: function(e) {
-				this.date = e.target.value
+				this.date = e.detail.value
 			},
 			bindTimeChange: function(e) {
-				this.time = e.target.value
+				this.time = e.detail.value
 			}
-			
+
 		}
 	}
 </script>
 
 <style>
-
+.uni-picker-tips {
+	font-size: 12px;
+	color: #666;
+	margin-bottom: 15px;
+	padding: 0 15px;
+	/* text-align: right; */
+}
 </style>

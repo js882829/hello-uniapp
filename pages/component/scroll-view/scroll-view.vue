@@ -29,6 +29,7 @@
 					<view id="demo3" class="scroll-view-item_H uni-bg-blue">C</view>
 				</scroll-view>
 			</view>
+            <view class="uni-common-pb"></view>
 		</view>
 	</view>
 </template>
@@ -70,7 +71,7 @@
 
 <style>
 	.scroll-Y {
-		height: 300upx;
+		height: 300rpx;
 	}
 
 	.scroll-view_H {
@@ -79,18 +80,18 @@
 	}
 
 	.scroll-view-item {
-		height: 300upx;
-		line-height: 300upx;
+		height: 300rpx;
+		line-height: 300rpx;
 		text-align: center;
-		font-size: 36upx;
+		font-size: 36rpx;
 	}
 
 	.scroll-view-item_H {
 		display: inline-block;
 		width: 100%;
-		height: 300upx;
-		line-height: 300upx;
+		height: 300rpx;
+		line-height: 300rpx;
 		text-align: center;
-		font-size: 36upx;
+		font-size: 36rpx;
 	}
 </style>

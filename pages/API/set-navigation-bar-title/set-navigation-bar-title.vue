@@ -7,9 +7,7 @@
 			</view>
 			<view class="uni-btn-v">
 				<button type="default" @click="setText">改变标题栏文字</button>
-				<!-- #ifndef MP-TOUTIAO -->
 				<button type="primary" @click="setBg">改变标题栏颜色</button>
-				<!-- #endif -->
 			</view>
 		</view>
 	</view>
@@ -34,8 +32,8 @@
 			setBg() {
 				this.hasSetBg = !this.hasSetBg;
 				uni.setNavigationBarColor({
-					frontColor: this.hasSetBg ? "#ffffff" : "#000000",
-					backgroundColor: this.hasSetBg ? "#007AFF" : "#F8F8F8"
+					frontColor: this.hasSetBg ?  "#000000" : "#ffffff",
+					backgroundColor: this.hasSetBg ? "#F8F8F8" : "#007AFF"
 				})
 			}
 		}

@@ -7,7 +7,7 @@
 				<textarea class="textarea" v-model="shareText" />
 				</view>
 			<view class="uni-title">分享图片：</view>
-			<view class="uni-uploader" style="padding:15upx; background:#FFF;">
+			<view class="uni-uploader" style="padding:15rpx; background:#FFF;">
 				<view class="uni-uploader__input-box" v-if="!image" @tap="chooseImage"></view>
 				<image class="uni-uploader__img" v-if="image" :src="image"></image>
 			</view>
@@ -35,7 +35,7 @@
 				</block>
 			</view>
 			<!-- #endif -->
-			<!-- #ifdef MP -->
+			<!-- #ifdef MP || QUICKAPP-WEBVIEW -->
 			<view class="uni-btn-v uni-common-mt">
 				<button type="primary" open-type="share">分享</button>
 			</view>
@@ -72,7 +72,7 @@
 			return {
 				title: this.shareText ? this.shareText : "欢迎体验uni-app",
 				path: '/pages/tabBar/component/component',
-				imageUrl:this.image ? this.image : 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/app/share-logo@3.png'
+				imageUrl:this.image ? this.image : 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b6304f00-5168-11eb-bd01-97bc1429a9ff.png'
 			}
 		},
 		onUnload:function(){
@@ -159,7 +159,7 @@
 					success: (e) => {
 						console.log('success', e);
 						uni.showModal({
-							content: '分享成功',
+							content: '已分享',
 							showCancel:false
 						})
 					},
@@ -189,7 +189,7 @@
 						shareOPtions.imageUrl = this.image;
 						break;
 					case 5:
-						shareOPtions.imageUrl = this.image ? this.image : 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/app/share-logo@3.png'
+						shareOPtions.imageUrl = this.image ? this.image : 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b6304f00-5168-11eb-bd01-97bc1429a9ff.png'
 						shareOPtions.title = '欢迎体验uniapp';
 						shareOPtions.miniProgram = {
 							id:'gh_33446d7f7a26',

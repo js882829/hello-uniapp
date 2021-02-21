@@ -59,7 +59,7 @@
             "datetime": "一天前",
             "article_type": 1,
             "title": "DCloud完成B2轮融资，uni-app震撼发布!",
-            "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
+            "image_url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b7c7f970-517d-11eb-97b7-0dc4655d6e68.jpg",
             "source": "DCloud",
             "comment_count": 11395
         },
@@ -67,22 +67,22 @@
             "datetime": "一天前",
             "article_type": 2,
             "title": "中国技术界小奇迹：HBuilder开发者突破200万",
-            "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg?imageView2/3/w/200/h/100/q/90",
+            "image_url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b4cd3000-517d-11eb-a16f-5b3e54966275.jpg",
             "source": "DCloud",
             "comment_count": 11395
         },
         data3: {
             "article_type": 3,
             "image_list": [{
-                "url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg?imageView2/3/w/200/h/100/q/90",
+                "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
                 "width": 563,
                 "height": 316
             }, {
-                "url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg?imageView2/3/w/200/h/100/q/90",
+                "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b4cd3000-517d-11eb-a16f-5b3e54966275.jpg",
                 "width": 641,
                 "height": 360
             }, {
-                "url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg?imageView2/3/w/200/h/100/q/90",
+                "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b7c7f970-517d-11eb-97b7-0dc4655d6e68.jpg",
                 "width": 640,
                 "height": 360
             }],
@@ -95,7 +95,7 @@
             "datetime": "2小时前",
             "article_type": 4,
             "title": "uni-app 支持原生小程序自定义组件，更开放、更自由",
-            "image_url": "https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg?imageView2/3/w/200/h/100/q/90",
+            "image_url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
             "source": "DCloud",
             "comment_count": 69
         }
@@ -301,8 +301,11 @@
     }
 
     .scroll-h {
-        width: 750upx;
-        height: 80upx;
+        width: 750rpx;
+		/* #ifdef H5 */
+		width:100%;
+		/* #endif */
+		height: 80rpx;
         flex-direction: row;
         /* #ifndef APP-PLUS */
         white-space: nowrap;
@@ -314,7 +317,7 @@
     }
 
     .line-h {
-        height: 1upx;
+        height: 1rpx;
         background-color: #cccccc;
     }
 
@@ -323,15 +326,15 @@
         display: inline-block;
         /* #endif */
         flex-wrap: nowrap;
-        padding-left: 34upx;
-        padding-right: 34upx;
+        padding-left: 34rpx;
+        padding-right: 34rpx;
     }
 
     .uni-tab-item-title {
         color: #555;
-        font-size: 30upx;
-        height: 80upx;
-        line-height: 80upx;
+        font-size: 30rpx;
+        height: 80rpx;
+        line-height: 80rpx;
         flex-wrap: nowrap;
         /* #ifndef APP-PLUS */
         white-space: nowrap;
@@ -356,7 +359,8 @@
         /* #ifndef MP-ALIPAY */
         flex-direction: column;
         /* #endif */
-        width: 750upx;
+        width: 750rpx;
+		width:100%;
     }
 
     .update-tips {
@@ -378,7 +382,8 @@
     }
 
     .refresh {
-        width: 750upx;
+        width: 750rpx;
+		width:100%;
         height: 64px;
         justify-content: center;
     }
@@ -425,7 +430,7 @@
     }
 
     .loading-more-text {
-        font-size: 28upx;
+        font-size: 28rpx;
         color: #999;
     }
 </style>

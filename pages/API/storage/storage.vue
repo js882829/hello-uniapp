@@ -41,10 +41,10 @@
 		},
 		methods: {
 			keyChange: function (e) {
-				this.key = e.target.value
+				this.key = e.detail.value
 			},
 			dataChange: function (e) {
-				this.data = e.target.value
+				this.data = e.detail.value
 			},
 			getStorage: function () {
 				var key = this.key,
@@ -91,7 +91,7 @@
 						success: (res) => {
 							uni.showModal({
 								title: '存储数据成功',
-								content: ' ',
+								content: JSON.stringify(res.errMsg),
 								showCancel:false
 							})
 						},

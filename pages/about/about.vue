@@ -35,12 +35,7 @@
 </template>
 
 <script>
-	import uLink from "@/components/uLink.vue"
-
 	export default {
-		components: {
-			uLink
-		},
 		data() {
 			return {
 				providerList: [],
@@ -127,7 +122,7 @@
 							type: (provider === "qq") ? 1 : 0,
 							title: '欢迎体验uni-app',
 							summary: 'uni-app 是一个使用 Vue.js 开发跨平台应用的前端框架',
-							imageUrl: 'https://img-cdn-qiniu.dcloud.net.cn/uploads/nav_menu/8.jpg',
+							imageUrl: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b09e38e0-5168-11eb-b680-7980c8a877b8.jpg',
 							href: "https://m3w.cn/uniapp",
 							success: (res) => {
 								console.log("success:" + JSON.stringify(res));
@@ -159,8 +154,8 @@
 	}
 
 	image {
-		width: 360upx;
-		height: 360upx;
+		width: 360rpx;
+		height: 360rpx;
 	}
 
 	.about {
@@ -170,7 +165,7 @@
 
 	.content {
 		flex: 1;
-		padding: 30upx;
+		padding: 30rpx;
 		flex-direction: column;
 		justify-content: center;
 	}
@@ -182,11 +177,11 @@
 	}
 
 	.qrcode .tip {
-		margin-top: 20upx;
+		margin-top: 20rpx;
 	}
 
 	.desc {
-		margin-top: 30upx;
+		margin-top: 30rpx;
 		display: block;
 	}
 
@@ -197,18 +192,18 @@
 
 	button {
 		width: 100%;
-		margin-top: 40upx;
+		margin-top: 40rpx;
 	}
 
 	.version {
-		height: 80upx;
-		line-height: 80upx;
+		height: 80rpx;
+		line-height: 80rpx;
 		justify-content: center;
 		color: #ccc;
 	}
 
 	.source {
-		margin-top: 30upx;
+		margin-top: 30rpx;
 		flex-direction: column;
 	}
 

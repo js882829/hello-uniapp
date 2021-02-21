@@ -5,7 +5,7 @@
 			<view class="uni-list">
 				<view class="uni-list-cell">
 					<view class="uni-pd">
-						<view class="uni-label" style="width:180px;">手机型号</view>
+						<view class="uni-label" style="width:180px;">设备型号</view>
 					</view>
 					<view class="uni-list-cell-db">
 						<input class="uni-input" type="text" :disabled="true" placeholder="未获取" :value="systemInfo.model"></input>
@@ -99,10 +99,20 @@
 						<input class="uni-input" type="text" :disabled="true" placeholder="未获取" :value="systemInfo.pixelRatio"></input>
 					</view>
 				</view>
+				<!-- #ifdef MP -->
+				<view class="uni-list-cell">
+					<view class="uni-pd">
+						<view class="uni-label" style="width:180px;">基础库版本</view>
+					</view>
+					<view class="uni-list-cell-db">
+						<input class="uni-input" type="text" :disabled="true" placeholder="未获取" :value="systemInfo.SDKVersion"></input>
+					</view>
+				</view>
+				<!-- #endif -->
 			</view>
 			<view class="uni-padding-wrap">
 				<view class="uni-btn-v">
-					<button type="primary" @tap="getSystemInfo">获取手机系统信息</button>
+					<button type="primary" @tap="getSystemInfo">获取设备系统信息</button>
 				</view>
 			</view>
 		</view>
@@ -133,6 +143,6 @@
 
 <style>
 	.uni-pd {
-		padding-left: 30upx;
+		padding-left: 30rpx;
 	}
 </style>

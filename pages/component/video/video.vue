@@ -3,8 +3,8 @@
 		<page-head :title="title"></page-head>
 		<view class="uni-padding-wrap uni-common-mt" v-if="showVideo">
 			<view>
-				<video id="myVideo" src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4"
-				 @error="videoErrorCallback" :danmu-list="danmuList" enable-danmu danmu-btn controls poster="https://img-cdn-qiniu.dcloud.net.cn/uniapp/doc/poster.png"></video>
+				<video id="myVideo" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-uni-app-doc/3c1782e0-60ab-11eb-8ff1-d5dcf8779628.m4v"
+				 @error="videoErrorCallback" :danmu-list="danmuList" enable-danmu danmu-btn controls poster="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b1476d40-4e5f-11eb-b997-9918a5dda011.png"></video>
 			</view>
 			<!-- #ifndef MP-ALIPAY || MP-TOUTIAO -->
 			<view class="uni-list uni-common-mt">
@@ -50,9 +50,14 @@
 			// #ifndef MP-ALIPAY || MP-TOUTIAO
 			this.videoContext = uni.createVideoContext('myVideo')
 			// #endif
-			setTimeout(()=>{
-				this.showVideo = true
-			},350)
+      // #ifdef APP-PLUS || MP-BAIDU
+      setTimeout(()=>{
+      	this.showVideo = true
+      },350)
+      // #endif
+      // #ifndef APP-PLUS || MP-BAIDU
+      this.showVideo = true
+      // #endif
 		},
 		methods: {
 			sendDanmu: function() {
@@ -83,6 +88,8 @@
 
 <style>
 	video {
-		width: 690upx;
+		width: 690rpx;
+		width: 100%;
+		height: 400px;
 	}
 </style>

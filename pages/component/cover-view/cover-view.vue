@@ -17,7 +17,7 @@
 
 			<!-- TODO QQ暂不支持地图组件 -->
 			<!-- #ifdef MP-QQ -->
-			<video class="video" src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126.mp4"></video>
+			<video class="video" src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/%E7%AC%AC1%E8%AE%B2%EF%BC%88uni-app%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D%EF%BC%89-%20DCloud%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B@20181126-lite.m4v"></video>
 			<!-- #endif -->
 
 			<cover-view class="cover-view">简单的cover-view</cover-view>
@@ -37,17 +37,23 @@
 			};
 		},
 		onLoad() {
+      // #ifdef APP-PLUS || MP-BAIDU
 			setTimeout(()=>{
 				this.showMap = true
 			},350)
+      // #endif
+      // #ifndef APP-PLUS || MP-BAIDU
+			this.showMap = true
+      // #endif
 		}
 	}
 </script>
 
 <style>
 	map {
-		width: 750upx;
-		height: 750upx;
+		width: 750rpx;
+		width: 100%;
+		height: 600px;
 	}
 
 	.video {
@@ -62,7 +68,7 @@
 		position: absolute;
 		left: 5px;
 		top: 5px;
-		width: 375upx;
+		width: 375rpx;
 		text-align: center;
 		background-color: #DDDDDD;
 	}

@@ -55,7 +55,8 @@
 				 * 解决动态设置indicator-style不生效的问题
 				 */
                 visible: true,
-                indicatorStyle: `height: ${Math.round(uni.getSystemInfoSync().screenWidth/(750/100))}px;`
+                // indicatorStyle: `height: ${Math.round(uni.getSystemInfoSync().screenWidth/(750/100))}px;`
+                indicatorStyle: `height: 50px;`
             }
         },
         methods: {
@@ -70,15 +71,15 @@
 </script>
 
 <style>
-	
+
     picker-view {
         width: 100%;
-        height: 600upx;
-        margin-top:20upx;
+        height: 600rpx;
+        margin-top:20rpx;
     }
 
     .item {
-        line-height: 100upx;
+        line-height: 100rpx;
         text-align: center;
     }
 </style>

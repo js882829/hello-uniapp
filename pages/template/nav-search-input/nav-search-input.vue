@@ -20,7 +20,7 @@
 
 			</view>
 		</view>
-		<view style="height: 1000upx;"></view>
+		<view style="height: 1000rpx;"></view>
 	</view>
 </template>
 
@@ -30,8 +30,8 @@ export default {
 		return {
 			showSwiper: false,
 			imgUrls: [
-				'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg',
-				'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg'
+				'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b4b60b10-5168-11eb-bd01-97bc1429a9ff.jpg',
+				'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b1dcfa70-5168-11eb-bd01-97bc1429a9ff.jpg'
 			]
 		};
 	},
@@ -65,10 +65,11 @@ export default {
 image,
 swiper,
 .img-view {
-	width: 750upx;
-	height: 500upx;
+	width: 750rpx;
+	width: 100%;
+	height: 500rpx;
 }
 .page-section-title {
-	margin-top: 50upx;
+	margin-top: 50rpx;
 }
 </style>

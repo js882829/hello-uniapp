@@ -1,61 +1,91 @@
 <template>
-	<view :class="{ 'uni-card--full': isFull === true || isFull === 'true', 'uni-card--shadow': isShadow === true || isShadow === 'true' }" class="uni-card" @click="onClick">
-		<view v-if="mode === 'style'" class="uni-card__thumbnailimage">
-			<image :src="thumbnail" mode="aspectFill" />
-			<view v-if="title" class="uni-card__thumbnailimage-title">{{ title }}</view>
-		</view>
-		<view v-if="mode === 'title'" class="uni-card__title">
-			<view class="uni-card__title-header">
-				<image :src="thumbnail" mode="aspectFill" />
-			</view>
-			<view class="uni-card__title-content">
-				<view class="uni-card__title-content-title">{{ title }}</view>
-				<view class="uni-card__title-content-extra">{{ extra }}</view>
-			</view>
-		</view>
-		<!-- 标题 -->
-		<view v-if="mode === 'basic' && title" class="uni-card__header">
+	<view class="uni-card uni-border" :class="{ 'uni-card--full': isFull === true || isFull === 'true', 'uni-card--shadow': isShadow === true || isShadow === 'true'}">
+		<!-- 基础 -->
+		<view v-if="mode === 'basic' && title" class="uni-card__header uni-border-bottom" @click.stop="onClick">
 			<view v-if="thumbnail" class="uni-card__header-extra-img-view">
 				<image :src="thumbnail" class="uni-card__header-extra-img" />
 			</view>
-			<view class="uni-card__header-title-text">{{ title }}</view>
-			<view v-if="extra" class="uni-card__header-extra-text">{{ extra }}</view>
+			<text class="uni-card__header-title-text">{{ title }}</text>
+			<text v-if="extra" class="uni-card__header-extra-text">{{ extra }}</text>
+		</view>
+		<!-- 标题 -->
+		<view v-if="mode === 'title'" class="uni-card__title uni-border-bottom" @click.stop="onClick">
+			<view class="uni-card__title-box">
+				<view class="uni-card__title-header">
+					<image class="uni-card__title-header-image" :src="thumbnail" mode="scaleToFill" />
+				</view>
+				<view class="uni-card__title-content">
+					<text class="uni-card__title-content-title uni-ellipsis">{{ title }}</text>
+					<text class="uni-card__title-content-extra uni-ellipsis">{{ subTitle }}</text>
+				</view>
+			</view>
+			<view v-if="extra">
+				<text class="uni-card__header-extra-text">{{ extra }}</text>
+			</view>
+		</view>
+		<!-- 图文 -->
+		<view v-if="mode === 'style'" class="uni-card__thumbnailimage" @click.stop="onClick">
+			<view class="uni-card__thumbnailimage-box">
+				<image class="uni-card__thumbnailimage-image" :src="thumbnail" mode="aspectFill" />
+			</view>
+			<view v-if="title" class="uni-card__thumbnailimage-title"><text class="uni-card__thumbnailimage-title-text">{{ title }}</text></view>
 		</view>
 		<!-- 内容 -->
-		<view class="uni-card__content uni-card__content--pd">
-			<view v-if="mode === 'style' && extra" class="uni-card__content-extra">{{ extra }}</view>
+		<view class="uni-card__content uni-card__content--pd" @click.stop="onClick">
+			<view v-if="mode === 'style' && extra" class=""><text class="uni-card__content-extra">{{ extra }}</text></view>
 			<slot />
 		</view>
 		<!-- 底部 -->
-		<view v-if="note" class="uni-card__footer">
+		<view v-if="note" class="uni-card__footer uni-border-top">
 			<slot name="footer">
-				<text>{{ note }}</text>
+				<text class="uni-card__footer-text">{{ note }}</text>
 			</slot>
 		</view>
 	</view>
 </template>
 
 <script>
+	/**
+	 * Card 卡片
+	 * @description 卡片视图组件
+	 * @tutorial https://ext.dcloud.net.cn/plugin?id=22
+	 * @property {String} title 标题文字
+	 * @property {String} subTitle 副标题（仅仅mode=title下生效）
+	 * @property {String} extra 标题额外信息
+	 * @property {String} note 标题左侧缩略图
+	 * @property {String} thumbnail 底部信息
+	 * @property {String} mode = [basic|style|title] 卡片模式
+	 * 	@value basic 基础卡片
+	 * 	@value style 图文卡片
+	 * 	@value title 标题卡片
+	 * @property {Boolean} isFull = [true | false] 卡片内容是否通栏，为 true 时将去除padding值
+	 * @property {Boolean} isShadow = [true | false] 卡片内容是否开启阴影
+	 * @event {Function} click 点击 Card 触发事件
+	 * @example <uni-card title="标题文字" thumbnail="xxx.jpg" extra="额外信息" note="Tips">内容主体，可自定义内容及样式</uni-card>
+	 */
 	export default {
 		name: 'UniCard',
 		props: {
 			title: {
 				type: String,
 				default: ''
-			}, // 标题
+			},
+			subTitle: {
+				type: String,
+				default: ''
+			},
 			extra: {
 				type: String,
 				default: ''
-			}, // 扩展信息
+			},
 			note: {
 				type: String,
 				default: ''
-			}, // Tips
+			},
 			thumbnail: {
 				type: String,
 				default: ''
-			}, // 缩略图
-			// 卡片模式 ， 可选值 basic：基础卡片 ；style ：图文卡片 ； title ：标题卡片
+			},
 			mode: {
 				type: String,
 				default: 'basic'
@@ -67,7 +97,7 @@
 			},
 			isShadow: {
 				// 是否开启阴影
-				type: Boolean,
+				type: [Boolean, String],
 				default: false
 			}
 		},
@@ -79,176 +109,293 @@
 	}
 </script>
 
-<style>
-	@charset "UTF-8";
-
+<style scoped>
 	.uni-card {
-		margin-left: 24upx;
-		margin-right: 24upx;
-		background: #fff;
-		box-shadow: none;
-		position: relative;
+		/* #ifndef APP-NVUE */
 		display: flex;
+		flex: 1;
+		box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+		/* #endif */
+		margin: 12px 15px;
+		background-color: #ffffff;
+		position: relative;
 		flex-direction: column;
-		border: 1px #ddd solid;
-		border-radius: 6upx;
-		overflow: hidden
+		border-radius: 5px;
+		overflow: hidden;
+		/* #ifdef H5 */
+		cursor: pointer;
+		/* #endif */
 	}
 
+	.uni-border {
+		position: relative;
+		/* #ifdef APP-NVUE */
+		border-color: #e5e5e5;
+		border-style: solid;
+		border-width: 0.5px;
+		/* #endif */
+		z-index: 1;
+	}
+
+	/* #ifndef APP-NVUE */
+	.uni-border:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		top: 0;
+		right: 0;
+		border: 1px solid #e5e5e5;
+		border-radius: 10px;
+		box-sizing: border-box;
+		width: 200%;
+		height: 200%;
+		transform: scale(0.5);
+		transform-origin: left top;
+		z-index: -1;
+	}
+
+	/* #endif */
+	.uni-border-bottom {
+		position: relative;
+		/* #ifdef APP-NVUE */
+		border-bottom-color: #e5e5e5;
+		border-bottom-style: solid;
+		border-bottom-width: 0.5px;
+		/* #endif */
+		z-index: 1;
+	}
+
+	/* #ifndef APP-NVUE */
+	.uni-border-bottom:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		top: 0;
+		right: 0;
+		border-bottom: 1px solid #e5e5e5;
+		box-sizing: border-box;
+		width: 200%;
+		height: 200%;
+		transform: scale(0.5);
+		transform-origin: left top;
+		z-index: -1;
+	}
+
+	/* #endif */
+	.uni-border-top {
+		position: relative;
+		/* #ifdef APP-NVUE */
+		border-top-color: #e5e5e5;
+		border-top-style: solid;
+		border-top-width: 0.5px;
+		/* #endif */
+		z-index: 1;
+	}
+
+	/* #ifndef APP-NVUE */
+	.uni-border-top:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		top: 0;
+		right: 0;
+		border-top: 1px solid #e5e5e5;
+		box-sizing: border-box;
+		width: 200%;
+		height: 200%;
+		transform: scale(0.5);
+		transform-origin: left top;
+		z-index: -1;
+	}
+
+	/* #endif */
 	.uni-card__thumbnailimage {
 		position: relative;
-		height: 300upx
+		flex-direction: column;
+		justify-content: center;
+		height: 150px;
+		overflow: hidden;
 	}
 
-	.uni-card__thumbnailimage image {
-		width: 100%;
-		height: 100%
+	.uni-card__thumbnailimage-box {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex: 1;
+		flex-direction: row;
+		overflow: hidden;
+	}
+
+	.uni-card__thumbnailimage-image {
+		flex: 1;
 	}
 
 	.uni-card__thumbnailimage-title {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
 		position: absolute;
 		bottom: 0;
-		padding: 15upx 20upx;
-		font-size: 32upx;
-		width: 100%;
-		color: #fff
+		left: 0;
+		right: 0;
+		flex-direction: row;
+		padding: 8px 12px;
+		background-color: rgba(0, 0, 0, 0.4);
+	}
+
+	.uni-card__thumbnailimage-title-text {
+		flex: 1;
+		font-size: 14px;
+		color: #fff;
 	}
 
 	.uni-card__title {
+		/* #ifndef APP-NVUE */
 		display: flex;
-		padding: 20upx;
-		border-bottom: 1px #f5f5f5 solid
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		padding: 10px;
+	}
+
+	.uni-card__title-box {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex: 1;
+		flex-direction: row;
+		align-items: center;
+		overflow: hidden;
 	}
 
 	.uni-card__title-header {
-		flex-shrink: 0;
-		width: 80upx;
-		height: 80upx;
+		width: 40px;
+		height: 40px;
 		overflow: hidden;
-		border-radius: 10upx
+		border-radius: 5px;
 	}
 
-	.uni-card__title-header image {
-		width: 100%;
-		height: 100%
+	.uni-card__title-header-image {
+		width: 40px;
+		height: 40px;
 	}
 
 	.uni-card__title-content {
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 		flex-direction: column;
-		justify-content: space-between;
-		padding-left: 20upx;
-		height: 80upx;
-		overflow: hidden
+		justify-content: center;
+		flex: 1;
+		padding-left: 10px;
+		height: 40px;
+		overflow: hidden;
 	}
 
 	.uni-card__title-content-title {
-		font-size: 30upx;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap
+		font-size: 14px;
+		line-height: 22px;
 	}
 
 	.uni-card__title-content-extra {
-		font-size: 26upx;
+		font-size: 12px;
+		line-height: 27px;
 		color: #999;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap
 	}
 
 	.uni-card__header {
-		position: relative;
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
+		position: relative;
 		flex-direction: row;
-		padding: 16upx;
-		align-items: center
-	}
-
-	.uni-card__header:after {
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		height: 1px;
-		content: '';
-		-webkit-transform: scaleY(.5);
-		transform: scaleY(.5);
-		background-color: #e5e5e5
+		padding: 12px;
+		align-items: center;
 	}
 
 	.uni-card__header-title {
-		flex: 1;
-		margin-right: 16upx;
+		/* #ifndef APP-NVUE */
 		display: flex;
+		/* #endif */
 		flex-direction: row;
+		margin-right: 8px;
 		justify-content: flex-start;
-		align-items: center
+		align-items: center;
 	}
 
 	.uni-card__header-title-text {
-		font-size: 32upx;
+		font-size: 16px;
 		flex: 1;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden
-	}
-
-	.uni-card__header-extra-img-view {
-		display: flex
+		color: #333;
 	}
 
 	.uni-card__header-extra-img {
-		height: 40upx;
-		width: 40upx;
-		margin-right: 16upx
+		height: 20px;
+		width: 20px;
+		margin-right: 8px;
 	}
 
 	.uni-card__header-extra-text {
-		flex: 0 0 auto;
-		width: 30%;
-		margin-left: 16upx;
-		font-size: 28upx;
+		flex: 1;
+		margin-left: 8px;
+		font-size: 12px;
 		text-align: right;
-		color: #666;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		overflow: hidden
+		color: #999;
 	}
 
 	.uni-card__content {
-		color: #555
+		color: #333;
 	}
 
 	.uni-card__content--pd {
-		padding: 16upx
+		padding: 12px;
 	}
 
 	.uni-card__content-extra {
-		padding-bottom: 20upx;
-		color: #999
+		font-size: 14px;
+		padding-bottom: 10px;
+		color: #999;
 	}
 
 	.uni-card__footer {
-		padding: 20upx;
+		justify-content: space-between;
+		padding: 12px;
+	}
+
+	.uni-card__footer-text {
 		color: #999;
-		font-size: 24upx;
-		border-top: 1px #f5f5f5 solid
+		font-size: 12px;
 	}
 
 	.uni-card--shadow {
-		border: 1px #ddd solid;
-		box-shadow: 0 1px 2px rgba(0, 0, 0, .2)
-	}
-
-	.uni-card--shadow:after {
-		border: none
+		position: relative;
+		/* #ifndef APP-NVUE */
+		box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+		/* #endif */
 	}
 
 	.uni-card--full {
 		margin: 0;
-		border-left: none;
-		border-right: none;
-		border-radius: 0
+		border-radius: 0;
+	}
+
+	/* #ifndef APP-NVUE */
+	.uni-card--full:after {
+		border-radius: 0;
+	}
+
+	/* #endif */
+	.uni-ellipsis {
+		/* #ifndef APP-NVUE */
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		/* #endif */
+		/* #ifdef APP-NVUE */
+		lines: 1;
+		/* #endif */
 	}
 </style>

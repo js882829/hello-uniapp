@@ -171,11 +171,9 @@
                 } else if (status === 2) {
                     uni.showModal({
                         content: "系统麦克风已关闭",
-                        confirmText: "设置",
+                        confirmText: "确定",
+                        showCancel: false,
                         success: function(res) {
-                            if (res.confirm) {
-                                permision.gotoiOSSetting();
-                            }
                         }
                     })
                 } else {
@@ -198,14 +196,14 @@
 
 <style>
     image {
-        width: 150upx;
-        height: 150upx;
+        width: 150rpx;
+        height: 150rpx;
     }
 
     .page-body-wrapper {
         justify-content: space-between;
         flex-grow: 1;
-        margin-bottom: 300upx;
+        margin-bottom: 300rpx;
     }
 
     .page-body-time {
@@ -215,31 +213,31 @@
     }
 
     .time-big {
-        font-size: 60upx;
-        margin: 20upx;
+        font-size: 60rpx;
+        margin: 20rpx;
     }
 
     .time-small {
-        font-size: 30upx;
+        font-size: 30rpx;
     }
 
     .page-body-buttons {
-        margin-top: 60upx;
+        margin-top: 60rpx;
         display: flex;
         justify-content: space-around;
     }
 
     .page-body-button {
-        width: 250upx;
+        width: 250rpx;
         text-align: center;
     }
 
     .button-stop-record {
-        width: 110upx;
-        height: 110upx;
-        border: 20upx solid #fff;
+        width: 110rpx;
+        height: 110rpx;
+        border: 20rpx solid #fff;
         background-color: #f55c23;
-        border-radius: 130upx;
+        border-radius: 130rpx;
         margin: 0 auto;
     }
 </style>

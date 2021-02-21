@@ -100,13 +100,13 @@
 		},
 		methods: {
 			sourceTypeChange: function(e) {
-				this.sourceTypeIndex = parseInt(e.target.value)
+				this.sourceTypeIndex = parseInt(e.detail.value)
 			},
 			sizeTypeChange: function(e) {
-				this.sizeTypeIndex = parseInt(e.target.value)
+				this.sizeTypeIndex = parseInt(e.detail.value)
 			},
 			countChange: function(e) {
-				this.countIndex = e.target.value;
+				this.countIndex = e.detail.value;
 			},
 			chooseImage: async function() {
 				// #ifdef APP-PLUS
@@ -134,12 +134,16 @@
 						this.imageList = this.imageList.concat(res.tempFilePaths);
 					},
 					fail: (err) => {
+						console.log("err: ",err);
 						// #ifdef APP-PLUS
 						if (err['code'] && err.code !== 0 && this.sourceTypeIndex === 2) {
 							this.checkPermission(err.code);
 						}
 						// #endif
 						// #ifdef MP
+						if(err.errMsg.indexOf('cancel') !== '-1'){
+							return;
+						}
 						uni.getSetting({
 							success: (res) => {
 								let authStatus = false;
@@ -226,10 +230,10 @@
 
 <style>
 	.cell-pd {
-		padding: 22upx 30upx;
+		padding: 22rpx 30rpx;
 	}
 
 	.list-pd {
-		margin-top: 50upx;
+		margin-top: 50rpx;
 	}
 </style>
